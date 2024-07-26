@@ -19,7 +19,7 @@ Pull the main branch with:
 
 Use pip3 to install missing packages. LLM and embeddings downloads will be handled by HuggingFace.
 
-Unpack demo vector DB in chroma_data.tgz first, and then start WSGI on local host/port with:
+Unpack demo vector DB in chroma_data.zip first, and then start WSGI on local host/port with:
 
   python3 manage.py runserver localhost:8080
   
