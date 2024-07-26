@@ -1,0 +1,107 @@
+
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<script type="text/javascript">
+function status(element) {
+  element.style.display = "hidden"
+  element.submit()
+}
+</script>
+<h1>UChat prototip</h1>
+<p><p>
+<form onsubmit="status(this); return true;" action="{% url 'params-refresh' %}" method="POST" name="ParamForm" id="ParamForm">
+{% csrf_token %}
+<table border="0">
+<tr><td>
+<label for="CHUNK_SIZE">CHUNK_SIZE: </label></td><td>
+<input type="text" id="CHUNK_SIZE" name="CHUNK_SIZE" maxlength="8" size="8" value="{{ CHUNK_SIZE }}">
+</td></tr>
+<tr><td>
+<label for="CHUNK_OVERLAP">CHUNK_OVERLAP: &nbsp; &nbsp; </label></td><td>
+<input type="text" id="CHUNK_OVERLAP" name="CHUNK_OVERLAP" maxlength="8" size="8" value="{{ CHUNK_OVERLAP }}">
+</td></tr>
+<tr><td>
+<label for="min_distance">min_distance: </label></td><td>
+<input type="text" id="min_distance" name="min_distance" maxlength="8" size="8" value="{{ min_distance }}">
+</ttd></tr>
+<tr><td>
+<label for="max_distance">max_distance: </label></td><td>
+<input type="text" id="max_distance" name="max_distance" maxlength="8" size="8" value="{{ max_distance }}">
+</td></tr>
+<tr><td>
+<label for="max_results">max_results: </label></td><td>
+<input type="text" id="max_results" name="max_results" maxlength="8" size="8" value="{{ max_results }}">
+</td></tr>
+<tr><td>
+<label for="max_conv">max_conv: </label></td><td>
+<input type="text" id="max_conv" name="max_conv" maxlength="8" size="8" value="{{ max_conv }}">
+</td></tr>
+<tr><td>
+<label for="min_len">min_len: </label></td><td>
+<input type="text" id="min_len" name="min_len" maxlength="8" size="8" value="{{ min_len }}">
+</td></tr>
+<tr><td>
+<label for="temperature">temperature: </label></td><td>
+<input type="text" id="temperature" name="temperature" maxlength="8" size="8" value="{{ temperature }}">
+</td></tr>
+<tr><td>
+<label for="top_p">top_p: </label></td><td>
+<input type="text" id="top_p" name="top_p" maxlength="8" size="8" value="{{ top_p }}">
+</td></tr>
+<tr><td>
+<label for="frequency_penalty">frequency_penalty: </label></td><td>
+<input type="text" id="frequency_penalty" name="frequency_penalty" maxlength="8" size="8" value="{{ frequency_penalty }}">
+</td></tr>
+<tr><td>
+<label for="presence_penalty">presence_penalty: </label></td><td>
+<input type="text" id="presence_penalty" name="presence_penalty" maxlength="8" size="8" value="{{ presence_penalty }}">
+</td></tr>
+<tr><td>
+<label for="max_tokens">max_tokens: </label></td><td>
+<input type="text" id="max_tokens" name="max_tokens" maxlength="8" size="8" value="{{ max_tokens }}">
+</td></tr>
+<tr><td>
+<label for="DEBUG">DEBUG: </label></td><td>
+<input type="text" id="DEBUG" name="DEBUG" maxlength="8" size="8" value="{{ DEBUG }}">
+</td></tr>
+<tr><td>
+<label for="ctxpre">ctxpre: </label></td><td>
+<input type="text" id="ctxpre" name="ctxpre" maxlength="8" size="8" value="{{ ctxpre }}">
+</td></tr>
+<tr><td>
+<label for="EMBED_MODEL">EMBED_MODEL: </label></td><td>
+<input type="text" id="EMBED_MODEL" name="EMBED_MODEL" maxlength="80" size="80" value="{{ EMBED_MODEL }}">
+</td></tr>
+<tr><td>
+<label for="model_id">model_id: </label></td><td>
+<input type="text" id="model_id" name="model_id" maxlength="80" size="80" value="{{ model_id }}">
+</td></tr>
+<tr><td>
+<label for="msg_content">msg_content: (*)</label></td><td>
+<input type="text" id="msg_content" name="msg_content" maxlength="80" size="80" value="{{ msg_content }}">
+</td></tr>
+<tr><td colspan="1">
+<label for="system">system: (*) </label><br></td>
+<td>
+<select id="jezik" name="jezik" onchange='this.form.submit();'>
+<option value="hrvatski" {{ selected_hr }}>hrvatski</option>
+<option value="slovenački" {{ selected_sl }}>slovenački</option>
+<option value="srpski" {{ selected_sr }}>srpski</option>
+<option value="makedonski" {{ selected_mk }}>makedonski</option>
+</select>
+&nbsp; &nbsp; (*)
+</td></tr>
+<tr><td></td><td>
+<textarea id="system" name="system" rows="10" cols="80">{{ system }}</textarea>
+</td></tr>
+</table>
+<input type="submit" value="Refresh"> &nbsp; &nbsp; &nbsp; &nbsp;
+<input type="submit" value="Set" formaction="{% url 'params' %}">
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+<input type="submit" value="Reset" formaction="{% url 'reset' %}">
+</form>
+
+{% endblock %}
+

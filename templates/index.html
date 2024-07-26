@@ -1,0 +1,41 @@
+
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<script type="text/javascript">
+function status(element) {
+  document.getElementById("query").style.display = "hidden"
+  element.submit()
+}
+</script>
+<h1>UChat prototip</h1>
+
+<p>
+<div style="width:800px;overflow:auto">
+<pre style="white-space:pre-wrap;">
+{{ reply }}
+</pre>
+</p>
+</div>  
+<p>
+<form onsubmit="status(this)" action="{% url 'index' %}" method="POST">
+{% csrf_token %}
+    <label for="query">Prompt: </label>
+    <br>
+<input type="text" id="query" name="query" maxlength="130" size="80" value="" autofocus>
+    <br>
+    <input type="submit" value="OK">
+    <br><br> &nbsp; &nbsp; &nbsp;
+    <label for="jezik">Jezik:</label> &nbsp; &nbsp; &nbsp;
+    <select id="jezik" name="jezik">
+    <option value="hrvatski" {{ selected_hr }}>hrvatski</option>
+    <option value="slovenački" {{ selected_sl }}>slovenački</option>
+    <option value="srpski" {{ selected_sr }}>srpski</option>
+    <option value="makedonski" {{ selected_mk }}>makedonski</option>
+    </select>
+</form>
+</p>
+
+{% endblock %}
+

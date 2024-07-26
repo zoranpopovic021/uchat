@@ -1,0 +1,76 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<h1>Editor</h1>
+<br>
+<table width="100%">
+<caption>Ukupno: {{ nr }} od {{ last }}</caption>
+<thead>
+<tr>
+<th width="5%">id</th>
+{% if id == "" %}
+<th width="5%">state</th>
+<th width="5%">next</th>
+<th width="5%">page</th>
+<th width="10%">jezik</th>
+<th widht="70%">document</th>
+</tr><tr>
+<form action="{% url "bot"%}" method="POST">
+{% csrf_token %}
+<th><input type="text" maxlength=5" size="5" id="f_id" name="f_id" value="{{ f_id }}"></th>
+<th><input type="text" maxlength=5" size="5" id="f_state" name="f_state" value="{{ f_state }}"></th>
+<th><input type="text" maxlength=5" size="5" id="f_next" name="f_next" value="{{ f_next }}"></th>
+<th><input type="text" maxlength=5" size="5" id="f_page" name="f_page" value="{{ f_page }}"></th>
+<th><input type="text" maxlength=10" size="10" id="f_jezik" name="f_jezik" value="{{ f_jezik }}"></th>
+<th><input type="text" maxlength=64" size="64" id="f_docu" name="f_docu" value="{{ f_docu }}"></th>
+<input type="submit" value="Refresh">
+</form>
+{% endif %}
+</tr>
+</thead>
+<tbody>
+{% if id == "" %}
+{% for row in id_docs %}
+<tr>
+{% for col in row %}
+{% if col|slice:":2" == "id" %}
+<td><a href="{% url 'editor_id' col|slice:"2:" 0 %}">{{ col }}</a></td>
+{% else %}
+<td width="">{{ col|truncatewords:16 }}</td>
+{% endif %}
+{% endfor %}
+</tr>
+{% endfor %}
+{% else %}
+<tr><td>{{ id }}</td><td></td></tr>
+{% endif %}
+</tbody>
+</table>
+<br>
+{% if id != "" %}
+<form action='{% url 'editor_id' id 0 %}' method="POST">
+{% csrf_token %}
+<table>
+<input type="hidden" id="id" name="id" value="id{{ id }}">
+<tr><td><label for="state">state:</label></td><td><input type="text" id="state" name="state" value="{{ state }}"></input></td></tr>
+<tr><td><label for="next">next:</label></td><td><input type="text" id="next" name="next" value="{{ next }}"></input></td></tr>
+<tr><td><label for="page">page:</label></td><td><input type="text" id="page" name="page" value="{{ page }}"></input></td></tr>
+<tr><td><label for="used">used:</label></td><td><input type="text" id="used" name="used" value="{{ used }}"></input></td></tr>
+<tr><td><label for="docu">document:</label></td><td><textarea id="docu" name="docu" cols="80" rows="10">{{ docu }}</textarea></td></tr>
+<tr><td><label for="source">source:</label></td><td><input type="text" id="source" name="source" value="{{ source }}"></input></td></tr>
+<tr><td></td><td> <select id="jezik" name="jezik">
+<option value="hrvatski" {{ selected_hr }}>hrvatski</option>
+<option value="slovenački" {{ selected_sl }}>slovenački</option>
+<option value="srpski" {{ selected_sr }}>srpski</option>
+<option value="makedonski" {{ selected_mk }}>makedonski</option>
+</select></td></tr>
+</table>
+<br>
+<div><input type="submit" value="Update" /></div>
+<div><input type="submit" value="Create" formaction="{% url 'editor_id' id 1 %}" /></div>
+<div><input type="submit" value="Delete" formaction="{% url 'editor_id' id 2 %}" /></div>
+<br>
+</form>
+{% endif %}
+{% endblock %}

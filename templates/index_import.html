@@ -1,0 +1,29 @@
+
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<h1>PDF import</h1>
+<p/>
+{{ answer }}
+<p/>
+<form action="{% url 'importpdf' %}" method="POST">
+{% csrf_token %}
+    <label for="path">Path: </label>
+    <br>
+<input type="text" id="path" name="path" maxlength="196" size="80" value="{{ path }}" autofocus>
+    <br>
+    <input type="submit" value="OK">
+    <p/>
+    <select id="jezik" name="jezik">
+    <option value="hrvatski" {{ selected_hr }}>hrvatski</option>
+    <option value="slovenački" {{ selected_sl }}>slovenački</option>
+    <option value="srpski" {{ selected_sr }}>srpski</option>
+    <option value="makedonski" {{ selected_mk }}>makedonski</option>
+    </select>
+<
+</form>
+<p/>
+
+{% endblock %}
+

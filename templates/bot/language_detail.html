@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<h1>Jezik: {{ language.name }}</h1>
+
+<ul>
+  <li>
+   <p><strong>ID:</strong> {{ language.id}}</p>
+  </li>
+  <li>
+   <p><strong>Skraćeno:</strong> {{ language.lid }}</p>
+  </li>
+</ul>
+
+{% endblock %}
