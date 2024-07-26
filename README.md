@@ -11,7 +11,7 @@ and examples for helpful chat with document contents.
 
 # How to start it:
 
-Prerequisite: pytho3n 3.11 installed, with OpenAI, ChromaDB and other packages.
+Prerequisite: Python 3.11 installed, with OpenAI, ChromaDB and other packages.
 
 Pull the main branch with:
 
